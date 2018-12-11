@@ -16,3 +16,5 @@ int main(int argc, char * argv[])
 	cin.get();
 	return 0;
 }
+
+// Tutorial to follow : https://www.willusher.io/sdl2%20tutorials/2013/08/17/lesson-1-hello-world

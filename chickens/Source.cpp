@@ -2,6 +2,21 @@
 #include <SDL.h>
 using namespace std;
 
+enum gender {
+	male=0,
+	female=1
+};
+
+class chicken {};
+
+class chicken {
+	int id,
+	string name,
+	chicken *ptrChickenMother,
+	chicken *ptrChickenFather,
+	gender gender
+};
+
 int main(int argc, char * argv[])
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)

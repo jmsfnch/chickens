@@ -7,17 +7,17 @@ enum gender {
 	female=1
 };
 
-class chicken {};
-
 class chicken {
-	int id,
-	string name,
-	chicken *ptrChickenMother,
-	chicken *ptrChickenFather,
-	gender gender
+	int id;
+	string name;
+	chicken *ptrChickenMother;
+	chicken *ptrChickenFather;
+	gender gender;
 };
 
-int main(int argc, char * argv[])
+
+
+int TestSDL()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -32,4 +32,14 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
+
+
+
+
 // Tutorial to follow : https://www.willusher.io/sdl2%20tutorials/2013/08/17/lesson-1-hello-world
+
+
+int main(int argc, char * argv[]) {
+	TestSDL();
+	return 0;
+}

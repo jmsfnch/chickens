@@ -16,6 +16,7 @@ int CurrentLiveChicken = NULL;
 
 using namespace std;
 
+// Returns nextChickenId and increments by 1
 int GetNextChickenId(void) {
 	return nextChickenId++;
 };
@@ -27,6 +28,13 @@ enum gender {
 	female	= 2
 };
 
+/*Life states:
+0 = unknown
+1 = egg
+2 = juvenile
+3 = adult
+4 = elder
+5 = dead*/
 enum lifeState {
 	unknown = 0,
 	egg = 1,
@@ -47,8 +55,8 @@ private:
 
 
 public:
+	// Default Constructor
 	chicken(void) {
-		/// Default Constructor
 		Id = NULL;
 		Name = "";
 		Gender = unsexed;
@@ -57,6 +65,7 @@ public:
 		LifeState = unknown;
 		LiveChickensCount++;
 	};
+	// Full init
 	chicken(string name, gender gender, chicken* mother, chicken* father, lifeState lifeState) { 
 		Id = GetNextChickenId();
 		Name = name;
@@ -64,6 +73,9 @@ public:
 		Mother = mother;
 		Father = father;
 		LifeState = lifeState;
+	};
+	int getId(void) {
+		return Id;
 	};
 	string getName(void) {
 		return Name;
@@ -105,20 +117,32 @@ int main(int argc, char * argv[]) {
 	// Create the father of everything (Id = -1 )
 	chicken* godChicken = new chicken("God", unsexed, nullptr, nullptr, unknown);
 
-	// Create array for all MORTAL chickens
-
-	chicken* ptrChickens;
-	ptrChickens = new chicken[MAX_CHICKENS];
+	// Array for all MORTAL chickens
+	chicken** ptrChickens;
+	ptrChickens = new chicken*[MAX_CHICKENS];
 
 	// Create first breeding pair
-
-	ptrChickens[nextChickenId] = chicken("Adam", male, godChicken, godChicken,adult);
-	ptrChickens[nextChickenId] = chicken("Eve", female, godChicken, godChicken,adult);
-
-	ptrChickens[nextChickenId].setLifeState(dead);
+	ptrChickens[nextChickenId] = new chicken("Adam", male, godChicken, godChicken, adult);
+	ptrChickens[nextChickenId] = new chicken("Eve", female, godChicken, godChicken, adult);
 
 
+	for (int i = 0; i < LiveChickensCount; i++) {
+		// NB: whitespace exists at the end of each line.  Whitespace between strings is concatenated.
+		chicken* c = ptrChickens[i];
+
+		printf("ptrChickens[%d]"
+			"Id = %d;"
+			"Name = %s;"
+			"Gender = unsexed;"
+			"Mother = nullptr;"
+			"Father = nullptr;"
+			"LifeState = unknown;", i, c->getId(), c->getName());
+			//c.getId(), c.getName());
 
 
-	return 0;
+
+
+	}
+		return 0;
+	
 }

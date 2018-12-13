@@ -5,7 +5,7 @@ const int MAX_CHICKENS = 100;
 //const int MAX_LIVECHICKENS = 100;
 //const int MAX_DEADCHICKENS = 100;
 
-int nextChickenId=-1;
+int nextChickenId=-2;
 
 //int nextLiveChickenId = -1;
 int LiveChickensCount = -1;
@@ -56,25 +56,25 @@ private:
 
 public:
 	// Default Constructor
-	chicken(void) {
-		Id = NULL;
-		Name = "";
-		Gender = unsexed;
-		Mother = nullptr;
-		Father = nullptr;
-		LifeState = unknown;
-		LiveChickensCount++;
-	};
 	// Full init
-	chicken(string name, gender gender, chicken* mother, chicken* father, lifeState lifeState) { 
+	 chicken(string name, gender gender, chicken* mother, chicken* father, lifeState lifeState) { 
 		Id = GetNextChickenId();
 		Name = name;
 		Gender = gender;
 		Mother = mother;
 		Father = father;
 		LifeState = lifeState;
+		LiveChickensCount++;
 	};
-	int getId(void) {
+	 chicken(void) {
+		 Id = NULL;
+		 Name = "";
+		 Gender = unsexed;
+		 Mother = nullptr;
+		 Father = nullptr;
+		 LifeState = unknown;
+	 };
+	 int getId(void) {
 		return Id;
 	};
 	string getName(void) {
@@ -111,36 +111,33 @@ public:
 
 
 int main(int argc, char * argv[]) {
-	cout << "Hello world!";
-
 
 	// Create the father of everything (Id = -1 )
 	chicken* godChicken = new chicken("God", unsexed, nullptr, nullptr, unknown);
 
 	// Array for all MORTAL chickens
-	chicken** ptrChickens;
-	ptrChickens = new chicken*[MAX_CHICKENS];
+	chicken* chickens[MAX_CHICKENS];
+
+	chicken** ptrChickens = chickens;
 
 	// Create first breeding pair
-	ptrChickens[nextChickenId] = new chicken("Adam", male, godChicken, godChicken, adult);
-	ptrChickens[nextChickenId] = new chicken("Eve", female, godChicken, godChicken, adult);
+	chickens[nextChickenId] = new chicken("Adam", male, godChicken, godChicken, adult);
+	chickens[nextChickenId] = new chicken("Eve", female, godChicken, godChicken, adult);
 
+	int y = 0;
 
-	for (int i = 0; i < LiveChickensCount; i++) {
+	for (int x = 0; x < LiveChickensCount; x++) {
 		// NB: whitespace exists at the end of each line.  Whitespace between strings is concatenated.
-		chicken* c = ptrChickens[i];
+		chicken* c = chickens[x];
 
-		printf("ptrChickens[%d]"
-			"Id = %d;"
-			"Name = %s;"
-			"Gender = unsexed;"
-			"Mother = nullptr;"
-			"Father = nullptr;"
-			"LifeState = unknown;", i, c->getId(), c->getName());
+		printf("ptrChickens[%d]\n" 
+			"Id = %d;\n" 
+			"Name = %s;\n" 
+			"Gender = xxx;\n" 
+			"Mother = xxx;\n" 
+			"Father = xxx;\n"                                     // use of ".c_str()" required to render strings
+			"LifeState = unknown;\n\n", x, c->getId(), c->getName().c_str(), c->getGender());
 			//c.getId(), c.getName());
-
-
-
 
 	}
 		return 0;
